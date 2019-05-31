@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Estoque Unipê</title>
+</h:head>
+<h:body>
+	<h:messages style="color:red;" showDetail="true" showSummary="false"
+		globalOnly="true" />
+	<h:outputText value="Cadastro de Endereço" style="font-size:20pt;" />
+	<br />
+	<h:form id="form" prependId="false">
+		<h:outputLabel value="logradouro:" for="logradouro" />
+		<h:inputText id="logradouro" value="#{enderecoBean.endereco.logradouro}"
+			required="true" />
+		<h:message for="logradouro" />
+		<br />
+
+		<h:outputLabel value="municipio:" />
+		<h:inputText value="#{enderecoBean.endereco.municipio}" />
+		<br />
+
+		<h:outputLabel value="estado:" />
+		<h:inputText value="#{enderecoBean.endereco.estado}" />
+		<br />
+		
+		<h:outputLabel value="numero:" />
+		<h:inputText value="#{enderecoBean.endereco.numero}" />
+		<br />
+		
+		<h:outputLabel value="cep:" />
+		<h:inputText value="#{enderecoBean.endereco.cep}" />
+		<br />
+
+		<h:commandButton value="Cadastrar"
+		action="#{enderecoBean.adicionarEndereco}" />
+	</h:form>
+</h:body>
+</html>

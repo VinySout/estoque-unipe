@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Estoque Unipê</title>
+</h:head>
+<h:body>
+	<h:outputText value="Listar Endereços" style="font-size:20pt;" />
+	<br />
+	<h:form>
+		<h:commandLink value="Home" action="index" />
+		<br />
+		<h:commandButton value="Novo" action="#{enderecoBean.prepararCadastro}"></h:commandButton>
+		<h:commandButton value="Mesma Pagina" action="#{enderecoBean.prepararList}"></h:commandButton>
+	</h:form>
+	<h:dataTable id="tableEnderecos" value="#{enderecoBean.listEndereco}"
+		var="endereco" border="1" cellpadding="10">
+		<f:facet name="header">
+			<h:outputText value="Endereços" />
+		</f:facet>
+		
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Logradouro" />
+			</f:facet>
+			<h:outputText value="#{endereco.logradouro}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Municipio" />
+			</f:facet>
+			<h:outputText value="#{endereco.municipio}" />
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Estado" />
+			</f:facet>
+			<h:outputText value="#{endereco.estado}" />
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Número" />
+			</f:facet>
+			<h:outputText value="#{endereco.numero}" />
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Cep" />
+			</f:facet>
+			<h:outputText value="#{endereco.cep}" />
+		</h:column>
+		<h:column>	
+			<h:form>			
+				<h:commandButton value="Alterar" action="#{enderecoBean.alterar(endereco)}" />
+				<h:commandButton value="delete" action="#{enderecoBean.remove(endereco)}" />	
+			</h:form>							
+		</h:column>
+			
+				
+	</h:dataTable>
+
+</h:body>
+</html>

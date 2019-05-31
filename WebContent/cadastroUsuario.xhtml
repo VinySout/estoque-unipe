@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Estoque Unipê</title>
+</h:head>
+<h:body>
+	<h:messages style="color:red;" showDetail="true" showSummary="false"
+		globalOnly="true" />
+	<h:outputText value="Cadastro de Usuários" style="font-size:20pt;" />
+	<br />
+	<h:form id="form" prependId="false">
+		<h:outputLabel value="Nome:" for="nome" />
+		<h:inputText id="nome" value="#{usuarioBean.usuario.nome}"
+			required="true" />
+		<h:message for="nome" />
+		<br />
+
+		<h:outputLabel value="Username:" />
+		<h:inputText value="#{usuarioBean.usuario.username}" />
+		<br />
+
+		<h:outputLabel value="Password:" />
+		<h:inputSecret value="#{usuarioBean.usuario.password}" />
+		<br />
+		
+		<h:outputLabel value="Cidade de Nascimento:" />
+		<h:selectOneMenu value="#{usuarioBean.usuario.endereco}">
+			<f:selectItem itemLabel="Selecione..." noSelectionOption="true" />
+			<f:selectItem itemLabel="João Pessoa" itemValue="João Pessoa" />
+			<f:selectItem itemLabel="Recife" itemValue="Recife" />
+		</h:selectOneMenu>
+		<br />
+
+		<h:outputLabel value="Email:" />
+		<h:inputText value="#{usuarioBean.usuario.email}" />
+		<br />
+		
+		<h:outputLabel value="Data Nascimento:" />
+		<h:inputText id="dtNasc" value="#{usuarioBean.usuario.data}" />
+		<h:message id="msgDtNasc" for="dtNasc" />
+		<br />
+		
+		<h:outputLabel value="Sexo:" />
+		<h:selectOneRadio value="#{usuarioBean.usuario.sexo}">
+			<f:selectItem itemLabel="Masculino" itemValue="M" />
+			<f:selectItem itemLabel="Feminino" itemValue="F" />
+		</h:selectOneRadio>
+		<br />		
+		<h:outputLabel value="Tipo:" />
+		<h:selectOneRadio value="#{usuarioBean.usuario.tipo}">
+			<f:selectItem itemLabel="Pessoa Física" itemValue="PF" />
+			<f:selectItem itemLabel="Pessoa Jurídica" itemValue="PJ" />
+		</h:selectOneRadio>
+		<br />	
+
+		<h:commandButton value="Cadastrar"
+		action="#{usuarioBean.adicionarUsuario}" />
+	</h:form>
+</h:body>
+</html>
