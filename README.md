@@ -3,12 +3,12 @@ Esse projeto será usado para conclusão da disciplina Java Web Frameworks. Na p
 
 COMPONENTES DO GRUPO
 
-ADENES IRINEU FREIRE JUNIOR
-JOSÉ EDILSON ALVES FERREIRA
-MARIO GEORGE BARBOSA GALVÃO
+ADENES IRINEU FREIRE JUNIOR;                                                                             
+JOSÉ EDILSON ALVES FERREIRA;                                                                            
+MARIO GEORGE BARBOSA GALVÃO; E                                                                                     
 ANTONIO VINÍCIUS DA SILVA SOUTO
 
 SOFTWARES E VERSÕES UTILIZADOS
 
-JRE 1.8
+JRE 1.8;                                                                                                                     
 APACHE TOMCAT v9.0
