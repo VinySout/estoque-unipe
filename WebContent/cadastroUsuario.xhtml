@@ -37,16 +37,14 @@
 				<p:message for="password" display="icon"/>
 				
 				<p:outputLabel value="Data Nascimento:" for="dtNasc"/>
-				<p:inputMask id="dtNasc" value="#{usuarioBean.usuario.data}" 
-				required="true" label="dtNasc" mask="99/99/9999">
-				<f:validateLength minimum="8" />
-				</p:inputMask>
-				<p:message for="dtNasc" display="icon"/>
+				<p:calendar id="dtNasc" value="#{usuarioBean.usuario.data}" 
+				required="true" showOn="button" navigator="true"
+						validator="datanascimentoValidator" />
+				<p:message for="dtNasc"/>
 				
 				<p:outputLabel value="Email:" for="email"/>
 				<p:inputText id="email" value="#{usuarioBean.usuario.email}"
-				required="true" label="email">
-				<f:validateLength minimum="8" />
+				required="true" validator="emailValidator">
 				</p:inputText>
 				<p:message for="email" display="icon"/>
 				
@@ -75,16 +73,22 @@
 				<p:selectOneRadio id="tipo" value="#{usuarioBean.usuario.tipo}">
 					<f:selectItem itemLabel="Pessoa Física" itemValue="PF" />
 					<f:selectItem itemLabel="Pessoa Jurídica" itemValue="PJ" />
+					<p:ajax listener="#{usuarioBean.renderizar}" update="form" />
 				</p:selectOneRadio>
 				<p:message for="tipo" display="icon"/>
 				
-				<p:outputLabel value="CPF/CNPJ:" for="documento" />
-				<p:inputMask id="documento" value="#{usuarioBean.usuario.documento}" 
-				required="true" label="documento" mask="999.999.999-99">
-				<f:validateLength minimum="14" />
-				</p:inputMask>
-				<p:message for="documento" display="icon"/>
-				
+				<p:fieldset>
+					<p:outputLabel value="CPF:" for="cpf" />
+					<p:inputMask id="cpf" value="#{usuarioBean.usuario.documento}" disabled="#{usuarioBean.isRenderiza}" 
+					required="true" converter="cpfConverter" mask="999.999.999-99"/>					
+				</p:fieldset>
+				<p:fieldset rendered="#{usuarioBean.isRenderiza}">
+
+						<p:outputLabel for="cnpj" value="CNPJ: " />
+						<p:inputMask mask="99.999.999/9999-99" id="cnpj" value="#{usuarioBean.usuario.documento}"
+							converter="cnpjConverter" />
+				</p:fieldset>
+								
 				<p:commandButton value="Cadastrar" update="panel" action="#{usuarioBean.adicionarUsuario}"/>				
 			</h:panelGrid>			
 		</p:panel>

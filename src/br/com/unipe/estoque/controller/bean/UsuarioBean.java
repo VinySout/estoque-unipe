@@ -16,6 +16,7 @@ public class UsuarioBean {
 	private Usuario usuario;
 	private List<Usuario> usuarioList;
 	private List<Usuario> filteredUsuarioList;
+	private Boolean isRenderiza = false;
 	
 	public UsuarioBean() {
 		usuario = new Usuario(); 
@@ -60,5 +61,20 @@ public class UsuarioBean {
 	}
 	public void setFilteredUsuarioList(List<Usuario> filteredUsuarioList) {
 		this.filteredUsuarioList = filteredUsuarioList;
+	}
+	public Boolean getIsRenderiza() {
+		return isRenderiza;
+	}
+
+	public void setIsRenderiza(Boolean isRenderiza) {
+		this.isRenderiza = isRenderiza;
+	}
+
+	public void renderizar() {
+		if (usuario.getTipo().equals("PJ")) {
+			isRenderiza = true;
+		} else {
+			isRenderiza = false;
+		}
 	}
 }
