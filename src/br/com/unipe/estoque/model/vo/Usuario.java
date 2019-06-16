@@ -6,10 +6,12 @@ public class Usuario {
 	private String username;
 	private String password;
 	private String endereco;
+	private String numero;
 	private String email;
 	private String data ;
 	private String sexo ;
 	private String tipo;
+	private String documento;
 	
 	public String getNome() {
 		return nome;
@@ -58,6 +60,18 @@ public class Usuario {
 	}
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+	public String getDocumento() {
+		return documento;
+	}
+	public void setDocumento(String documento) {
+		this.documento = documento;
+	}
+	public String getNumero() {
+		return numero;
+	}
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 	
 }

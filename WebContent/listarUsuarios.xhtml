@@ -1,82 +1,67 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"	
+	xmlns:ui="http://java.sun.com/jsf/facelets"			
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Estoque Unipê</title>
 </h:head>
 <h:body>
-	<h:outputText value="Listar Usuários" style="font-size:20pt;" />
-	<br />
 	<h:form>
-		<h:commandLink value="Home" action="index" />
-		<br />
+		<h:commandButton value="Home" action="index"></h:commandButton>
 		<h:commandButton value="Novo" action="#{usuarioBean.prepararCadastro}"></h:commandButton>
 		<h:commandButton value="Mesma Pagina" action="#{usuarioBean.prepararList}"></h:commandButton>
 	</h:form>
-	<h:dataTable id="tableUsuarios" value="#{usuarioBean.listUsuario}"
-		var="usuario" border="1" cellpadding="10">
+	<h:form>
+	<p:dataTable id="tableUsuarios" var="usuario" value="#{usuarioBean.listUsuario}" filteredValue="#{usuarioBean.filteredUsuarioList}"
+		widgetVar="usuarioWidget">
+		
 		<f:facet name="header">
-			<h:outputText value="Usuários" />
+			<p:outputPanel>
+				<h:outputText value="Lista de Usuários" style="font-size:20pt;"/>
+			</p:outputPanel>
+			<p:outputPanel>
+				<h:outputText value="Filtrar por:"/>
+				<p:inputText id="globalFilter" onkeyup="PF('usuarioWidget').filter()"
+					style="width:150px" placeholder="Palavra chave..."/>
+			</p:outputPanel>
 		</f:facet>
-
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Nome" />
-			</f:facet>
-			<h:outputText value="#{usuario.nome}" />
-		</h:column>
-
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Username" />
-			</f:facet>
-			<h:outputText value="#{usuario.username}" />
-		</h:column>
-		
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Password" />
-			</f:facet>
-			<h:outputText value="#{usuario.password}" />
-		</h:column>
-		
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Endereço" />
-			</f:facet>
-			<h:outputText value="#{usuario.endereco}" />
-		</h:column>
-		
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Email" />
-			</f:facet>
-			<h:outputText value="#{usuario.email}" />
-		</h:column>
-		
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Data Nascimento" />
-			</f:facet>
-			<h:outputText value="#{usuario.data}" />
-		</h:column>
-		
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Sexo" />
-			</f:facet>
-			<h:outputText value="#{usuario.sexo}" />
-		</h:column>
-
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Tipo de Pessoa" />
-			</f:facet>
-			<h:outputText value="#{usuario.tipo}" />
-		</h:column>
-		
-	</h:dataTable>
-
+		<p:column headerText="Nome" filterBy="#{usuario.nome}" filterMatchMode="contains">
+			<h:outputText value="#{usuario.nome}"/>
+		</p:column>
+		<p:column headerText="Username" filterBy="#{usuario.username}" filterMatchMode="contains">
+			<h:outputText value="#{usuario.username}"/>
+		</p:column>
+		<p:column headerText="Password" filterBy="#{usuario.password}" filterMatchMode="contains">
+			<h:outputText value="#{usuario.password}"/>
+		</p:column>
+		<p:column headerText="Data de Nascimento" filterBy="#{usuario.data}" filterMatchMode="contains">
+			<h:outputText value="#{usuario.data}"/>
+		</p:column>
+		<p:column headerText="Sexo" filterBy="#{usuario.sexo}" filterMatchMode="contains">
+			<h:outputText value="#{usuario.sexo}"/>
+		</p:column>
+		<p:column headerText="CEP" filterBy="#{usuario.endereco}" filterMatchMode="contains">
+			<h:outputText value="#{usuario.endereco}"/>
+		</p:column>
+		<p:column headerText="Telefone" filterBy="#{usuario.numero}" filterMatchMode="contains">
+			<h:outputText value="#{usuario.numero}"/>
+		</p:column>
+		<p:column headerText="Email" filterBy="#{usuario.email}" filterMatchMode="contains">
+			<h:outputText value="#{usuario.email}"/>
+		</p:column>
+		<p:column headerText="Tipo de Pessoa" filterBy="#{usuario.tipo}" filterMatchMode="contains">
+			<h:outputText value="#{usuario.tipo}"/>
+		</p:column>
+		<p:column headerText="CPF/CNPJ" filterBy="#{usuario.documento}" filterMatchMode="contains">
+			<h:outputText value="#{usuario.documento}"/>
+		</p:column>
+		<p:column headerText="❁◕‿◕❁">		
+				<p:commandButton value="Alterar" update="tableUsuarios" action="#{usuarioBean.alterar(usuario)}" />
+				<p:commandButton value="Excluir" update="tableUsuarios" action="#{usuarioBean.remove(usuario)}" />						
+		</p:column>			
+	</p:dataTable>
+	</h:form>
 </h:body>
 </html>

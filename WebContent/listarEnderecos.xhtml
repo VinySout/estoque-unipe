@@ -1,68 +1,61 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"			
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Estoque Unipê</title>
 </h:head>
 <h:body>
-	<h:outputText value="Listar Endereços" style="font-size:20pt;" />
-	<br />
 	<h:form>
-		<h:commandLink value="Home" action="index" />
-		<br />
+		<h:commandButton value="Home" action="index"></h:commandButton>
 		<h:commandButton value="Novo" action="#{enderecoBean.prepararCadastro}"></h:commandButton>
 		<h:commandButton value="Mesma Pagina" action="#{enderecoBean.prepararList}"></h:commandButton>
 	</h:form>
-	<h:dataTable id="tableEnderecos" value="#{enderecoBean.listEndereco}"
-		var="endereco" border="1" cellpadding="10">
-		<f:facet name="header">
-			<h:outputText value="Endereços" />
-		</f:facet>
-		
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Logradouro" />
-			</f:facet>
-			<h:outputText value="#{endereco.logradouro}" />
-		</h:column>
-
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Municipio" />
-			</f:facet>
-			<h:outputText value="#{endereco.municipio}" />
-		</h:column>
-		
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Estado" />
-			</f:facet>
-			<h:outputText value="#{endereco.estado}" />
-		</h:column>
-		
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Número" />
-			</f:facet>
-			<h:outputText value="#{endereco.numero}" />
-		</h:column>
-		
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Cep" />
-			</f:facet>
-			<h:outputText value="#{endereco.cep}" />
-		</h:column>
-		<h:column>	
-			<h:form>			
-				<h:commandButton value="Alterar" action="#{enderecoBean.alterar(endereco)}" />
-				<h:commandButton value="delete" action="#{enderecoBean.remove(endereco)}" />	
-			</h:form>							
-		</h:column>
+	<h:form>
+		<p:dataTable  id="tableEnderecos" var="endereco" value="#{enderecoBean.listEndereco}" filteredValue="#{enderecoBean.filteredEnderecoList}"
+			widgetVar="enderecoWidget">
 			
-				
-	</h:dataTable>
-
+			<f:facet name="header">
+				<p:outputPanel>
+					<h:outputText value="Lista de Endereços" style="font-size:20pt;"/>
+				</p:outputPanel>
+				<p:outputPanel>
+					<h:outputText value="filtrar por:"/>
+					<p:inputText id="globalFilter" onkeyup="PF('enderecoWidget').filter()"
+					style="width:150px" placeholder="Palavra chave..."/>
+				</p:outputPanel>
+			</f:facet>
+			
+			<p:column headerText="Estado" sortBy="#{endereco.estado}" filterBy="#{endereco.estado}" filterMatchMode="contains">
+				<h:outputText value="#{endereco.estado}" />
+			</p:column>
+	
+			<p:column headerText="Municipio" sortBy="#{endereco.municipio}" filterBy="#{endereco.municipio}" filterMatchMode="contains">
+				<h:outputText value="#{endereco.municipio}" />
+			</p:column>
+			<p:column headerText="Cep" filterBy="#{endereco.cep}" filterMatchMode="contains">
+				<h:outputText value="#{endereco.cep}" />
+			</p:column>
+			
+			<p:column headerText="Bairro" filterBy="#{endereco.bairro}" filterMatchMode="contains">
+				<h:outputText value="#{endereco.bairro}" />
+			</p:column>
+			
+			<p:column headerText="Logradouro" filterBy="#{endereco.logradouro}" filterMatchMode="contains">
+				<h:outputText value="#{endereco.logradouro}" />
+			</p:column>
+	
+			<p:column headerText="Número" filterBy="#{endereco.numero}" filterMatchMode="contains">
+				<h:outputText value="#{endereco.numero}" />
+			</p:column>
+	
+			<p:column headerText="ಥ_ಥ">				
+					<p:commandButton value="Alterar" update="tableEnderecos" action="#{enderecoBean.alterar(endereco)}" />
+					<p:commandButton value="Excluir" update="tableEnderecos" action="#{enderecoBean.remove(endereco)}" />	
+			</p:column>				
+		</p:dataTable>
+	</h:form>
 </h:body>
 </html>

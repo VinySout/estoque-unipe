@@ -12,7 +12,7 @@ public enum Enderecos {
 	private List<Endereco> listEnderecos;
 	
 	private Enderecos() {
-		listEnderecos = new ArrayList();
+		listEnderecos = new ArrayList<>();
 	}
 	public void addAddress(Endereco u) {
 		listEnderecos.add(u);
@@ -21,7 +21,6 @@ public enum Enderecos {
 		listEnderecos.remove(e);
 	}
 	public void alterar(Endereco e) {
-		System.out.println("alterou");
 	}
 	public List<Endereco> AllAddress(){
 		return listEnderecos;

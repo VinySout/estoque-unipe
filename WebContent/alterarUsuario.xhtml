@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"			
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Estoque Unipê</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:commandButton value="Home" action="index"></h:commandButton>
+		<h:commandButton value="Novo" action="#{usuarioBean.prepararCadastro}"></h:commandButton>
+		<h:commandButton value="Voltar" action="listarUsuarios"></h:commandButton>
+	</h:form>
+	<h:form>	
+	<p:dataTable id="tableUsuarios" var="usuario" value="#{usuarioBean.listUsuario}">
+		<f:facet name="header">
+			<p:outputPanel>
+				<h:outputText value="Alterar Usuários" style="font-size:20pt;"/>
+			</p:outputPanel>
+		</f:facet>
+		
+		<p:column headerText="Nome">
+			<h:inputText value="#{usuario.nome}" />
+		</p:column>
+
+		<p:column headerText="Username">
+			<h:inputText value="#{usuario.username}" />
+		</p:column>
+		
+		<p:column headerText="Password">
+			<h:inputText value="#{usuario.password}" />
+		</p:column>
+
+		<p:column headerText="Data de Nascimento">
+			<h:inputText value="#{usuario.data}" />
+		</p:column>
+		
+		<p:column headerText="CEP">
+			<h:inputText value="#{usuario.endereco}" />
+		</p:column>
+		
+		<p:column headerText="Número">
+			<h:inputText value="#{usuario.numero}" />
+		</p:column>
+		
+		<p:column headerText="E-mail">
+			<h:inputText value="#{usuario.email}" />
+		</p:column>
+		
+		<p:column headerText="CPF/CNPJ">
+			<h:inputText value="#{usuario.documento}" />
+		</p:column>
+		
+		<p:column>			
+			<p:commandButton value="Salvar" action="#{usuarioBean.update(usuario)}" />
+		</p:column>				
+	</p:dataTable>
+	</h:form>
+</h:body>
+</html>

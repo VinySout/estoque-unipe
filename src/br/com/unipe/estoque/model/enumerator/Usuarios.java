@@ -6,19 +6,25 @@ import java.util.List;
 import br.com.unipe.estoque.model.vo.Usuario;
 
 public enum Usuarios {
-	
+
 	INSTANCE;
-
-	private List<Usuario> listUsuarios;
-
+	
+	private List<Usuario> listUsuario;
+	
 	private Usuarios() {
-		listUsuarios = new ArrayList();
+		listUsuario = new ArrayList<Usuario>();
 	}
-	public void addUser(Usuario u) {
-		listUsuarios.add(u);
+	public void addUser(Usuario u){
+		listUsuario.add(u);
 	}
-
-	public List<Usuario> allUsers() {
-		return listUsuarios;
+	public void remove(Usuario u){
+		listUsuario.remove(u);
 	}
+	public void alterar(Usuario u){
+		
+	}
+	public List<Usuario> allUsers(){
+		return listUsuario;
+	}
+	
 }

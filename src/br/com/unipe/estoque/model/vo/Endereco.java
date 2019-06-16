@@ -2,9 +2,10 @@ package br.com.unipe.estoque.model.vo;
 
 public class Endereco {
 	
-	private String logradouro;
-	private String municipio;
 	private String estado;
+	private String municipio;
+	private String bairro;
+	private String logradouro;		
 	private String numero;
 	private String cep;
 	
@@ -61,6 +62,12 @@ public class Endereco {
 		} else if (!cep.equals(other.cep))
 			return false;
 		return true;
+	}
+	public String getBairro() {
+		return bairro;
+	}
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
 	}
 	
 	

@@ -1,16 +1,12 @@
 package br.com.unipe.estoque.controller.bean;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 
 import br.com.unipe.estoque.model.enumerator.Usuarios;
 import br.com.unipe.estoque.model.vo.Usuario;
-
 
 
 @ManagedBean(name = "usuarioBean")
@@ -18,9 +14,11 @@ import br.com.unipe.estoque.model.vo.Usuario;
 public class UsuarioBean {
 	
 	private Usuario usuario;
-
+	private List<Usuario> usuarioList;
+	private List<Usuario> filteredUsuarioList;
+	
 	public UsuarioBean() {
-		usuario = new Usuario();
+		usuario = new Usuario(); 
 	}
 	public String prepararCadastro() {
 		usuario = new Usuario();
@@ -30,30 +28,37 @@ public class UsuarioBean {
 		return "";
 	}
 	public String adicionarUsuario() {
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			Date dataNasc = sdf.parse(usuario.getData());
-		} catch (Exception e) {
-			FacesContext fc = FacesContext.getCurrentInstance();
-			FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Data Invalida",
-					"Formato da Data Invalido (dd/MM/yyyy)");
-			fc.addMessage("msgDtNasc", fm);
-			return "";
-		}
-
 		Usuarios.INSTANCE.addUser(usuario);
 		return "listarUsuarios";
 	}
-	public List<Usuario> getListUsuario() {
-		return Usuarios.INSTANCE.allUsers();
+	
+	public String remove(Usuario u) {
+		Usuarios.INSTANCE.remove(u);
+		return "listarUsuarios";
 	}
-
+	public String alterar(Usuario u) {
+		return "alterarUsuario";
+	}
+	public String update(Usuario u) {
+		return "listarUsuarios";
+	}
 	public Usuario getUsuario() {
 		return usuario;
 	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuario(Usuario u) {
+		this.usuario = u;
 	}
-
+	@PostConstruct
+	public void postConstruct() {
+		usuarioList = Usuarios.INSTANCE.allUsers();
+	}
+	public List<Usuario> getListUsuario(){
+		return usuarioList;
+	}
+	public List<Usuario> getFilteredUsuarioList() {
+		return filteredUsuarioList;
+	}
+	public void setFilteredUsuarioList(List<Usuario> filteredUsuarioList) {
+		this.filteredUsuarioList = filteredUsuarioList;
+	}
 }

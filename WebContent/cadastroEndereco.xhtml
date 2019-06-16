@@ -1,40 +1,69 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Estoque Unipê</title>
 </h:head>
 <h:body>
-	<h:messages style="color:red;" showDetail="true" showSummary="false"
-		globalOnly="true" />
-	<h:outputText value="Cadastro de Endereço" style="font-size:20pt;" />
-	<br />
 	<h:form id="form" prependId="false">
-		<h:outputLabel value="logradouro:" for="logradouro" />
-		<h:inputText id="logradouro" value="#{enderecoBean.endereco.logradouro}"
-			required="true" />
-		<h:message for="logradouro" />
-		<br />
+		<p:growl id="msgs2" showDetail="true" />
+		<p:panel id="panel" header="Novo Endereço">
+			<p:messages id="msgs"/>		
+			<h:panelGrid columns="3" cellpadding="5">
+			
+				<p:outputLabel value="Estado" for="estado" />
+					<p:selectOneMenu id="estado" value="#{enderecoBean.selectEstado}"
+						converter="estadoConverter">
+						<f:selectItem itemLabel="Selecione..." noSelectionOption="true" />
+						<f:selectItems value="#{enderecoBean.listEstados}" />
+						<p:ajax event="change" update="municipio"
+							listener="#{enderecoBean.carregarMunicipios}" />
+					</p:selectOneMenu>
+					<p:message for="estado" />
 
-		<h:outputLabel value="municipio:" />
-		<h:inputText value="#{enderecoBean.endereco.municipio}" />
-		<br />
-
-		<h:outputLabel value="estado:" />
-		<h:inputText value="#{enderecoBean.endereco.estado}" />
-		<br />
-		
-		<h:outputLabel value="numero:" />
-		<h:inputText value="#{enderecoBean.endereco.numero}" />
-		<br />
-		
-		<h:outputLabel value="cep:" />
-		<h:inputText value="#{enderecoBean.endereco.cep}" />
-		<br />
-
-		<h:commandButton value="Cadastrar"
-		action="#{enderecoBean.adicionarEndereco}" />
+					<p:outputLabel value="Municipio" for="municipio" />
+					<p:selectOneMenu id="municipio"
+						value="#{enderecoBean.endereco.municipio}"
+						converter="municipioConverter">
+						<f:selectItem itemLabel="Selecione..." noSelectionOption="true" />
+						<f:selectItems value="#{enderecoBean.listMunicipios}" />
+					</p:selectOneMenu>
+					<p:message for="municipio" />
+				
+				<p:outputLabel value="Cep:" for="cep"/>
+				<p:inputText id="cep" value="#{enderecoBean.endereco.cep}"
+				required="true" label="numero">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+				<p:message for="cep" display="icon"/>
+				
+				<p:outputLabel value="Bairro:" for="bairro"/>
+				<p:inputText id="bairro" value="#{enderecoBean.endereco.bairro}"
+				required="true" label="bairro">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+				<p:message for="bairro" display="icon"/>
+						
+				<p:outputLabel value="Logradouro:" for="logradouro" />
+				<p:inputText id="logradouro" value="#{enderecoBean.endereco.logradouro}"
+				required="true" label="logradouro">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+				<p:message for="logradouro" display="icon"/>
+				
+				<p:outputLabel value="Numero:" for="numero"/>
+				<p:inputText id="numero" value="#{enderecoBean.endereco.numero}" 
+				required="true" label="numero">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+				<p:message for="numero" display="icon"/>
+				
+			</h:panelGrid>
+			<p:commandButton value="Cadastrar" update="panel" action="#{enderecoBean.adicionarEndereco}"/>	
+		</p:panel>		
 	</h:form>
 </h:body>
 </html>

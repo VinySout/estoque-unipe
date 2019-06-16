@@ -1,17 +1,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">	
 <h:head>
 	<title>Estoque Unipê</title>
 </h:head>
-<h:body>
-	<h:outputText value="Seja Bem-Vindo" />
-	<br />
-	<h:form>
-		<h:commandLink value="Listar Endereços" action="listarEnderecos" />
-		<h:commandLink value="Listar Usuários" action="listarUsuarios" />
-	</h:form>
-</h:body>
+<ui:composition template="/layout/template.xhtml">
+	<ui:define name="content">
+		<p:panel header="Seja Bem-Vindo">
+			<br />
+			<p:panelGrid columns="3" layout="grid">
+				<ui:repeat var="valor" value="">
+					<h:outputText value="" />
+					<br />
+			   </ui:repeat>
+			</p:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
 </html>
 

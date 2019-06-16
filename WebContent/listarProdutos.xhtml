@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"			
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+	<title>Estoque Unipê</title>
+</h:head>
+<h:body>
+
+	<h:form>
+		<h:commandButton value="Home" action="index"></h:commandButton>
+		<h:commandButton value="Novo" action="#{produtoBean.prepararCadastro}"></h:commandButton>
+		<h:commandButton value="Mesma Pagina" action="#{produtoBean.prepararList}"></h:commandButton>
+	</h:form>
+	<h:form>
+	<p:dataTable id="table" var="produto" value="#{produtoBean.listProduto}" filteredValue="#{produtoBean.filteredProdutoList}"
+		widgetVar="produtoWidget">
+		
+		<f:facet name="header">
+			<p:outputPanel>
+				<h:outputText value="Lista de Produtos" style="font-size:20pt;"/>
+			</p:outputPanel>
+			<p:outputPanel>
+				<h:outputText value="Filtrar por:"/>
+				<p:inputText id="globalFilter" onkeyup="PF('produtoWidget').filter()"
+					style="width:150px" placeholder="Palavra chave..."/>
+			</p:outputPanel>
+		</f:facet>
+		
+		<p:column headerText="Nome" filterBy="#{produto.nome}" filterMatchMode="contains">
+			<h:outputText value="#{produto.nome}" />
+		</p:column>
+		
+		<p:column headerText="Quantidade" filterBy="#{produto.quantidade}" filterMatchMode="contains">
+			<h:outputText value="#{produto.quantidade}" />
+		</p:column>
+
+		<p:column filterBy="#{produto.tipo}" headerText="Tipo" filterMatchMode="exact">
+			<f:facet name="filter">
+				<p:selectOneMenu onchange="PF('produtoWidget').filter()">
+					<f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
+					<f:selectItems value="#{produtoBean.tipoList}"/>
+				</p:selectOneMenu>
+			</f:facet>
+			<h:outputText value="#{produto.tipo}" />
+		</p:column>
+		<p:column headerText="ಠ_ಠ">		
+				<p:commandButton value="Alterar" update="table" action="#{produtoBean.alterar(produto)}" />
+				<p:commandButton value="Excluir" update="table" action="#{produtoBean.remove(produto)}" />						
+		</p:column>
+	</p:dataTable>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Estoque Unipê</title>
+</h:head>
+<h:body>
+	<h:form id="form" prependId="false">
+		
+		<p:panel id="panel" header="Novo Produto">
+			<p:messages id="msgs"/>
+			<h:panelGrid columns="3" cellpadding="5">
+			
+				<p:outputLabel value="Nome:" for="nome" />
+				<p:inputText id="nome" value="#{produtoBean.produto.nome}"
+				required="true" label="nome">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+				<p:message for="nome" display="icon" />
+				
+				<p:outputLabel value="Quantidade:" for="quantidade" />
+				<p:inputText id="quantidade" value="#{produtoBean.produto.quantidade}" required="true" label="quantidade">
+				<f:validateLength minimum="1" />
+				<p:ajax update="msgQuantidade" event="keyup" />
+				</p:inputText>
+				<p:message for="quantidade" id="msgQuantidade" display="icon" />
+				<br />
+				<p:selectOneMenu value="#{produtoBean.produto.tipo}" style="width:125px">
+		            <f:selectItem itemLabel="Alimento" itemValue="Alimento" />
+		            <f:selectItem itemLabel="Eletrodoméstico" itemValue="Eletrodoméstico" />
+		            <f:selectItem itemLabel="Eletroportáteis" itemValue="Eletroportáteis" />
+		            <f:selectItem itemLabel="Informática" itemValue="Informática" />
+	        	</p:selectOneMenu>
+			</h:panelGrid>						
+			<p:commandButton value="Cadastrar" update="panel" action="#{produtoBean.adicionarProduto}"/>
+		</p:panel>
+	</h:form>	
+</h:body>
+</html>
